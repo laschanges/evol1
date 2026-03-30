@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>evol - ?뚭컻????/title>
+  <style>
+    body {
+      font-family: 'Segoe UI', 'Apple SD Gothic Neo', Arial, sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, #ffe0ec 0%, #f9f6ff 100%);
+      color: #222;
+    }
+    .hero {
+      text-align: center;
+      padding: 64px 16px 32px 16px;
+      background: linear-gradient(135deg, #ffb6d5 0%, #f9f6ff 100%);
+    }
+    .hero h1 {
+      font-size: 2.8rem;
+      margin-bottom: 12px;
+      letter-spacing: -2px;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 32px;
+      color: #555;
+    }
+    .cta-btn {
+      background: #ff4f8b;
+      color: #fff;
+      border: none;
+      border-radius: 32px;
+      padding: 16px 40px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(255,79,139,0.12);
+      transition: background 0.2s;
+    }
+    .cta-btn:hover {
+      background: #e13c74;
+    }
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 32px;
+      margin: 48px 0 32px 0;
+    }
+    .feature {
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      padding: 28px 24px;
+      max-width: 260px;
+      min-width: 200px;
+      text-align: center;
+    }
+    .feature h3 {
+      margin: 0 0 10px 0;
+      color: #ff4f8b;
+      font-size: 1.2rem;
+    }
+    .feature p {
+      margin: 0;
+      color: #444;
+      font-size: 1rem;
+    }
+    .mockup {
+      display: flex;
+      justify-content: center;
+      margin: 32px 0 48px 0;
+    }
+    .mockup-card {
+      background: #fff;
+      border-radius: 24px;
+      box-shadow: 0 4px 24px rgba(255,79,139,0.10);
+      width: 320px;
+      padding: 32px 24px;
+      text-align: center;
+      margin: 0 12px;
+    }
+    .mockup-card h2 {
+      color: #ff4f8b;
+      margin-bottom: 8px;
+    }
+    .mockup-card p {
+      color: #555;
+      margin-bottom: 0;
+    }
+    .profiles-section {
+      max-width: 900px;
+      margin: 0 auto 48px auto;
+      padding: 0 16px;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      animation: fadeIn 0.7s;
+    }
+    .profiles-title {
+      font-size: 1.5rem;
+      margin: 32px 0 16px 0;
+      color: #ff4f8b;
+      font-weight: bold;
+    }
+    .profiles {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+    .profile-card {
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      width: 180px;
+      padding: 20px 12px 16px 12px;
+      text-align: center;
+      transition: transform 0.15s;
+    }
+    .profile-card:hover {
+      transform: translateY(-6px) scale(1.04);
+      box-shadow: 0 8px 24px rgba(255,79,139,0.13);
+    }
+    .profile-img {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 12px;
+      border: 3px solid #ffb6d5;
+    }
+    .profile-name {
+      font-weight: bold;
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+    }
+    .profile-desc {
+      color: #666;
+      font-size: 0.97rem;
+      margin-bottom: 0;
+    }
+    @media (max-width: 700px) {
+      .features { flex-direction: column; gap: 18px; }
+      .mockup { flex-direction: column; }
+      .mockup-card { margin: 12px 0; }
+      .profiles { flex-direction: column; gap: 18px; }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <h1>evol - ?덈줈??留뚮궓???쒖옉</h1>
+    <p>AI 湲곕컲 留ㅼ묶?쇰줈 吏꾩쭨 ?몄뿰??留뚮굹???뚭컻???? evol?먯꽌 ?ㅻ젅??泥?留뚮궓???쒖옉?섏꽭??</p>
+    <button class="cta-btn" id="tryFreeBtn">臾대즺濡??댁슜?대낫湲?/button>
+  </div>
+
+  <div class="features">
+    <div class="feature">
+      <h3>?ㅼ떆媛?AI 留ㅼ묶</h3>
+      <p>AI媛 ??痍⑦뼢??遺꾩꽍??媛????留욌뒗 ?곷?瑜?異붿쿇?댁쨾??</p>
+    </div>
+    <div class="feature">
+      <h3>?덉쟾???몄쬆 ?쒖뒪??/h3>
+      <p>泥좎????몄쬆?쇰줈 ?덉떖?섍퀬 留뚮궓???쒖옉?????덉뼱??</p>
+    </div>
+    <div class="feature">
+      <h3>媛먭컖?곸씤 ?꾨줈??移대뱶</h3>
+      <p>?섎쭔??媛쒖꽦???대┛ ?꾨줈?꾨줈 留ㅻ젰???댄븘?대낫?몄슂.</p>
+    </div>
+  </div>
+
+  <div class="mockup">
+    <div class="mockup-card">
+      <h2>evol</h2>
+      <p>吏꾩쭨 ?몄뿰??留뚮굹??媛???ㅻ쭏?명븳 諛⑸쾿</p>
+    </div>
+  </div>
+
+  <div class="profiles-section" id="profilesSection">
+    <div class="profiles-title">異붿쿇 ?꾨줈??/div>
+    <div class="profiles" id="profilesContainer"></div>
+  </div>
+
+  <script>
+    const maleProfiles = [
+      { name: '誘쇱?', age: 29, desc: 'IT ?ㅽ??몄뾽 媛쒕컻?? 而ㅽ뵾? ?곗콉??醫뗭븘?댁슂.', img: 'https://randomuser.me/api/portraits/men/32.jpg' },
+      { name: '吏??, age: 31, desc: '?ы뻾怨??ъ쭊, ?덈줈??寃쏀뿕??利먭퉩?덈떎.', img: 'https://randomuser.me/api/portraits/men/45.jpg' },
+      { name: '?꾩슦', age: 27, desc: '?대룞怨??뚯븙, 湲띿젙?곸씤 ?먮꼫吏 媛??', img: 'https://randomuser.me/api/portraits/men/76.jpg' },
+      { name: '?꾩쑄', age: 30, desc: '梨낃낵 ?곹솕, ??뷀븯??嫄?醫뗭븘?댁슂.', img: 'https://randomuser.me/api/portraits/men/85.jpg' },
+      { name: '?쒖?', age: 28, desc: '?붾━? ?쒕씪?대툕, ?덈줈??留쏆쭛 ?먮갑??', img: 'https://randomuser.me/api/portraits/men/23.jpg' },
+      { name: '?쒖슦', age: 26, desc: '諛섎젮?숇Ъ怨??곗콉, ?먯뿰???щ옉?댁슂.', img: 'https://randomuser.me/api/portraits/men/54.jpg' }
+    ];
+    const femaleProfiles = [
+      { name: '?쒖뿰', age: 27, desc: '?붿옄???꾧났, 媛먭컖?곸씤 痍⑤?瑜?利먭꺼??', img: 'https://randomuser.me/api/portraits/women/65.jpg' },
+      { name: '吏??, age: 28, desc: '?ы뻾怨?留쏆쭛, ?덈줈??移쒓뎄瑜?醫뗭븘?댁슂.', img: 'https://randomuser.me/api/portraits/women/12.jpg' },
+      { name: '?섏?', age: 26, desc: '?뚯븙怨?誘몄닠, 媛먯꽦?곸씤 ??붾? 醫뗭븘?댁슂.', img: 'https://randomuser.me/api/portraits/women/34.jpg' },
+      { name: '?섎퉰', age: 29, desc: '?대룞怨??낆꽌, ?먭린怨꾨컻??愿??留롮븘??', img: 'https://randomuser.me/api/portraits/women/41.jpg' },
+      { name: '?덈┛', age: 30, desc: '?곹솕? ?곗콉, ?뚯냼???쇱긽??利먭퉩?덈떎.', img: 'https://randomuser.me/api/portraits/women/22.jpg' },
+      { name: '?ㅼ?', age: 27, desc: '移댄럹 ?먮갑, ?ъ쭊 李띻린, ?덈줈??寃쏀뿕??醫뗭븘?댁슂.', img: 'https://randomuser.me/api/portraits/women/53.jpg' }
+    ];
+
+    function getRandomProfiles(arr, n) {
+      const shuffled = arr.slice().sort(() => 0.5 - Math.random());
+      return shuffled.slice(0, n);
+    }
+
+    function renderProfiles() {
+      const males = getRandomProfiles(maleProfiles, 3);
+      const females = getRandomProfiles(femaleProfiles, 3);
+      const container = document.getElementById('profilesContainer');
+      container.innerHTML = '';
+      [...males, ...females].forEach(profile => {
+        const card = document.createElement('div');
+        card.className = 'profile-card';
+        card.innerHTML = `
+          <img class="profile-img" src="${profile.img}" alt="${profile.name}">
+          <div class="profile-name">${profile.name} (${profile.age})</div>
+          <div class="profile-desc">${profile.desc}</div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    document.getElementById('tryFreeBtn').addEventListener('click', function() {
+      renderProfiles();
+      const section = document.getElementById('profilesSection');
+      section.style.display = 'flex';
+      section.scrollIntoView({ behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>
