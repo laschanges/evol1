@@ -363,6 +363,37 @@
       transform: translateY(-2px);
     }
 
+    .comments-section {
+      margin: 42px auto 0;
+      padding: 32px 24px;
+      border-radius: 30px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+
+    .comments-section h2 {
+      margin: 0 0 10px;
+      text-align: center;
+      font-size: 1.6rem;
+      color: var(--text);
+    }
+
+    .comments-section p {
+      margin: 0 0 22px;
+      text-align: center;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    #disqus_thread {
+      border-radius: 22px;
+      padding: 20px;
+      background: var(--surface-strong);
+      border: 1px solid var(--border);
+    }
+
     .profiles-section {
       max-width: 980px;
       margin: 0 auto;
@@ -465,6 +496,10 @@
       }
 
       .application-section {
+        padding: 24px 18px;
+      }
+
+      .comments-section {
         padding: 24px 18px;
       }
     }
@@ -595,6 +630,13 @@
       </form>
     </section>
 
+    <section class="comments-section" id="commentsSection">
+      <h2>참가 후기와 댓글</h2>
+      <p>evol이 궁금했다면 아래 댓글에서 자유롭게 질문하고 후기를 남겨보세요.</p>
+      <div id="disqus_thread"></div>
+      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </section>
+
     <div class="profiles-section" id="profilesSection">
       <div class="profiles-title">추천 프로필</div>
       <div class="profiles" id="profilesContainer"></div>
@@ -684,6 +726,20 @@
     previewThemeBtn.addEventListener('click', toggleTheme);
 
     initializeTheme();
+  </script>
+  <script>
+    var disqus_config = function () {
+      this.page.url = 'https://evol1.laschanges.workers.dev/';
+      this.page.identifier = 'evol-home';
+    };
+
+    (function () {
+      var d = document;
+      var s = d.createElement('script');
+      s.src = 'https://evol-1.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
   </script>
 </body>
 </html>
