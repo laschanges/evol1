@@ -250,6 +250,119 @@
       line-height: 1.7;
     }
 
+    .application-section {
+      margin: 42px auto 0;
+      padding: 32px 24px;
+      border-radius: 30px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+
+    .application-header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .application-header h2 {
+      margin: 0 0 10px;
+      font-size: 1.7rem;
+      color: var(--text);
+    }
+
+    .application-header p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .application-form {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-field.full-width {
+      grid-column: 1 / -1;
+    }
+
+    .form-field label {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .form-field input,
+    .form-field select,
+    .form-field textarea {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px 16px;
+      background: var(--surface-strong);
+      color: var(--text);
+      font: inherit;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .form-field textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .form-field input:focus,
+    .form-field select:focus,
+    .form-field textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(255, 79, 139, 0.12);
+    }
+
+    .form-note {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+
+    .checkbox-field {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 10px;
+      padding-top: 4px;
+    }
+
+    .checkbox-field input {
+      width: auto;
+      margin-top: 3px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      border: none;
+      border-radius: 18px;
+      padding: 16px 20px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 14px 30px rgba(255, 79, 139, 0.24);
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .submit-btn:hover {
+      background: var(--accent-strong);
+      transform: translateY(-2px);
+    }
+
     .profiles-section {
       max-width: 980px;
       margin: 0 auto;
@@ -314,6 +427,7 @@
 
     @media (max-width: 900px) {
       .features,
+      .application-form,
       .profiles {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
@@ -345,8 +459,13 @@
       }
 
       .features,
+      .application-form,
       .profiles {
         grid-template-columns: 1fr;
+      }
+
+      .application-section {
+        padding: 24px 18px;
       }
     }
 
@@ -404,6 +523,77 @@
         <p>진짜 인연을 만나는 가장 스마트한 방법</p>
       </div>
     </div>
+
+    <section class="application-section" id="applicationFormSection">
+      <div class="application-header">
+        <h2>소개팅 참가 신청</h2>
+        <p>아래 정보를 입력해주시면 evol 팀이 매칭 심사를 거쳐 연락드릴게요.</p>
+      </div>
+      <form class="application-form" action="https://formspree.io/f/xbdpyylp" method="POST">
+        <input type="hidden" name="_subject" value="evol 소개팅 참가 신청">
+
+        <div class="form-field">
+          <label for="applicant-name">이름</label>
+          <input id="applicant-name" name="이름" type="text" placeholder="홍길동" required>
+        </div>
+
+        <div class="form-field">
+          <label for="applicant-age">나이</label>
+          <input id="applicant-age" name="나이" type="number" min="20" max="99" placeholder="29" required>
+        </div>
+
+        <div class="form-field">
+          <label for="applicant-gender">성별</label>
+          <select id="applicant-gender" name="성별" required>
+            <option value="">선택해주세요</option>
+            <option value="여성">여성</option>
+            <option value="남성">남성</option>
+            <option value="논바이너리">논바이너리</option>
+            <option value="기타">기타</option>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label for="applicant-region">활동 지역</label>
+          <input id="applicant-region" name="활동 지역" type="text" placeholder="서울 성수 / 경기 분당" required>
+        </div>
+
+        <div class="form-field">
+          <label for="applicant-phone">연락처</label>
+          <input id="applicant-phone" name="연락처" type="tel" placeholder="010-1234-5678" required>
+        </div>
+
+        <div class="form-field">
+          <label for="applicant-email">이메일</label>
+          <input id="applicant-email" name="이메일" type="email" placeholder="you@example.com" required>
+        </div>
+
+        <div class="form-field full-width">
+          <label for="applicant-job">직업 / 소속</label>
+          <input id="applicant-job" name="직업 또는 소속" type="text" placeholder="브랜드 디자이너 / 스타트업 PM">
+        </div>
+
+        <div class="form-field full-width">
+          <label for="applicant-intro">자기소개</label>
+          <textarea id="applicant-intro" name="자기소개" placeholder="관심사, 성격, 원하는 만남 분위기를 자유롭게 적어주세요." required></textarea>
+        </div>
+
+        <div class="form-field full-width">
+          <label for="applicant-ideal">이상형 / 원하는 상대</label>
+          <textarea id="applicant-ideal" name="이상형" placeholder="어떤 사람을 만나고 싶은지 적어주세요."></textarea>
+        </div>
+
+        <div class="form-field full-width checkbox-field">
+          <input id="applicant-consent" name="개인정보 수집 동의" type="checkbox" value="동의함" required>
+          <label for="applicant-consent">매칭 진행을 위한 개인정보 수집 및 연락에 동의합니다.</label>
+        </div>
+
+        <div class="form-field full-width">
+          <button class="submit-btn" type="submit">신청서 제출하기</button>
+          <p class="form-note">제출 후 Formspree를 통해 신청서가 전달됩니다. 빠른 시일 내에 안내 연락을 드릴게요.</p>
+        </div>
+      </form>
+    </section>
 
     <div class="profiles-section" id="profilesSection">
       <div class="profiles-title">추천 프로필</div>
