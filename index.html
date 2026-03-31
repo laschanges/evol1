@@ -5,187 +5,410 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>evol - 소개팅 앱</title>
   <style>
+    :root {
+      color-scheme: light;
+      --bg: linear-gradient(135deg, #ffe3ef 0%, #fff9fc 45%, #eef6ff 100%);
+      --hero-bg: linear-gradient(135deg, rgba(255, 194, 220, 0.92) 0%, rgba(255, 247, 252, 0.95) 55%, rgba(235, 244, 255, 0.95) 100%);
+      --surface: rgba(255, 255, 255, 0.88);
+      --surface-strong: #ffffff;
+      --text: #251b2b;
+      --muted: #6e6074;
+      --accent: #ff4f8b;
+      --accent-strong: #e13c74;
+      --border: rgba(255, 79, 139, 0.16);
+      --shadow: 0 24px 60px rgba(137, 82, 114, 0.16);
+      --shadow-soft: 0 14px 30px rgba(137, 82, 114, 0.1);
+      --toggle-bg: rgba(255, 255, 255, 0.72);
+    }
+
+    body.dark-mode {
+      color-scheme: dark;
+      --bg: radial-gradient(circle at top, #33243a 0%, #17141d 55%, #0d0b12 100%);
+      --hero-bg: linear-gradient(140deg, rgba(56, 38, 65, 0.96) 0%, rgba(24, 21, 31, 0.94) 100%);
+      --surface: rgba(29, 26, 39, 0.88);
+      --surface-strong: #231f31;
+      --text: #f7eef9;
+      --muted: #c3b4ca;
+      --accent: #ff7aa9;
+      --accent-strong: #ff95b8;
+      --border: rgba(255, 122, 169, 0.22);
+      --shadow: 0 28px 70px rgba(0, 0, 0, 0.45);
+      --shadow-soft: 0 14px 34px rgba(0, 0, 0, 0.3);
+      --toggle-bg: rgba(42, 36, 54, 0.88);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: 'Segoe UI', 'Apple SD Gothic Neo', Arial, sans-serif;
+      font-family: "Segoe UI", "Apple SD Gothic Neo", Arial, sans-serif;
       margin: 0;
-      background: linear-gradient(135deg, #ffe0ec 0%, #f9f6ff 100%);
-      color: #222;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      transition: background 0.35s ease, color 0.35s ease;
     }
-    .hero {
-      text-align: center;
-      padding: 64px 16px 32px 16px;
-      background: linear-gradient(135deg, #ffb6d5 0%, #f9f6ff 100%);
+
+    .page-shell {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 24px 16px 56px;
     }
-    .hero h1 {
-      font-size: 2.8rem;
-      margin-bottom: 12px;
-      letter-spacing: -2px;
-    }
-    .hero p {
-      font-size: 1.2rem;
-      margin-bottom: 32px;
-      color: #555;
-    }
-    .cta-btn {
-      background: #ff4f8b;
-      color: #fff;
-      border: none;
-      border-radius: 32px;
-      padding: 16px 40px;
-      font-size: 1.1rem;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 4px 16px rgba(255,79,139,0.12);
-      transition: background 0.2s;
-    }
-    .cta-btn:hover {
-      background: #e13c74;
-    }
-    .features {
+
+    .topbar {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 32px;
-      margin: 48px 0 32px 0;
+      justify-content: flex-end;
+      margin-bottom: 16px;
     }
+
+    .theme-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 12px 18px;
+      background: var(--toggle-bg);
+      color: var(--text);
+      font-size: 0.96rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(14px);
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .theme-toggle:hover {
+      transform: translateY(-1px);
+      border-color: var(--accent);
+    }
+
+    .theme-toggle-icon {
+      font-size: 1.05rem;
+    }
+
+    .hero,
+    .feature,
+    .mockup-card,
+    .profile-card {
+      transition: background 0.35s ease, color 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      padding: 72px 20px 40px;
+      border: 1px solid var(--border);
+      border-radius: 36px;
+      background: var(--hero-bg);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -10% -45% auto;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.15);
+      filter: blur(8px);
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 18px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.32);
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    .hero h1 {
+      margin: 0 0 14px;
+      font-size: clamp(2.4rem, 4vw, 3.7rem);
+      letter-spacing: -0.04em;
+    }
+
+    .hero p {
+      max-width: 700px;
+      margin: 0 auto 30px;
+      color: var(--muted);
+      font-size: 1.08rem;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .cta-btn,
+    .secondary-btn {
+      border: none;
+      border-radius: 999px;
+      padding: 15px 28px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .cta-btn {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 14px 30px rgba(255, 79, 139, 0.25);
+    }
+
+    .cta-btn:hover {
+      background: var(--accent-strong);
+      transform: translateY(-2px);
+    }
+
+    .secondary-btn {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .secondary-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .section-heading {
+      margin: 42px 0 18px;
+      text-align: center;
+      font-size: 1.5rem;
+      color: var(--text);
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+      margin: 32px 0 0;
+    }
+
     .feature {
-      background: #fff;
-      border-radius: 18px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
       padding: 28px 24px;
-      max-width: 260px;
-      min-width: 200px;
+      border-radius: 24px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(10px);
       text-align: center;
     }
+
     .feature h3 {
-      margin: 0 0 10px 0;
-      color: #ff4f8b;
-      font-size: 1.2rem;
+      margin: 0 0 10px;
+      color: var(--accent);
+      font-size: 1.18rem;
     }
+
     .feature p {
       margin: 0;
-      color: #444;
-      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.65;
     }
+
     .mockup {
       display: flex;
       justify-content: center;
-      margin: 32px 0 48px 0;
+      margin: 28px 0 0;
     }
+
     .mockup-card {
-      background: #fff;
-      border-radius: 24px;
-      box-shadow: 0 4px 24px rgba(255,79,139,0.10);
-      width: 320px;
-      padding: 32px 24px;
+      width: min(100%, 440px);
+      padding: 34px 28px;
       text-align: center;
-      margin: 0 12px;
+      border-radius: 28px;
+      border: 1px solid var(--border);
+      background: var(--surface-strong);
+      box-shadow: var(--shadow);
     }
+
     .mockup-card h2 {
-      color: #ff4f8b;
-      margin-bottom: 8px;
+      margin: 0 0 10px;
+      color: var(--accent);
+      font-size: 1.7rem;
     }
+
     .mockup-card p {
-      color: #555;
-      margin-bottom: 0;
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
     }
+
     .profiles-section {
-      max-width: 900px;
-      margin: 0 auto 48px auto;
-      padding: 0 16px;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 4px;
       display: none;
       flex-direction: column;
       align-items: center;
-      animation: fadeIn 0.7s;
+      animation: fadeIn 0.7s ease;
     }
+
     .profiles-title {
       font-size: 1.5rem;
-      margin: 32px 0 16px 0;
-      color: #ff4f8b;
-      font-weight: bold;
+      margin: 38px 0 18px;
+      color: var(--accent);
+      font-weight: 700;
     }
+
     .profiles {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 32px;
-      justify-content: center;
-      margin-bottom: 24px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+      width: 100%;
     }
+
     .profile-card {
-      background: #fff;
-      border-radius: 18px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-      width: 180px;
-      padding: 20px 12px 16px 12px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: var(--shadow-soft);
+      padding: 22px 16px 18px;
       text-align: center;
-      transition: transform 0.15s;
+      backdrop-filter: blur(10px);
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
     }
+
     .profile-card:hover {
-      transform: translateY(-6px) scale(1.04);
-      box-shadow: 0 8px 24px rgba(255,79,139,0.13);
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: var(--shadow);
     }
+
     .profile-img {
-      width: 72px;
-      height: 72px;
+      width: 76px;
+      height: 76px;
       border-radius: 50%;
       object-fit: cover;
       margin-bottom: 12px;
-      border: 3px solid #ffb6d5;
+      border: 3px solid rgba(255, 79, 139, 0.32);
     }
+
     .profile-name {
-      font-weight: bold;
-      font-size: 1.1rem;
-      margin-bottom: 4px;
+      font-weight: 700;
+      font-size: 1.08rem;
+      margin-bottom: 6px;
     }
+
     .profile-desc {
-      color: #666;
-      font-size: 0.97rem;
+      color: var(--muted);
+      font-size: 0.96rem;
+      line-height: 1.55;
       margin-bottom: 0;
     }
-    @media (max-width: 700px) {
-      .features { flex-direction: column; gap: 18px; }
-      .mockup { flex-direction: column; }
-      .mockup-card { margin: 12px 0; }
-      .profiles { flex-direction: column; gap: 18px; }
+
+    @media (max-width: 900px) {
+      .features,
+      .profiles {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
     }
+
+    @media (max-width: 700px) {
+      .page-shell {
+        padding: 18px 14px 42px;
+      }
+
+      .topbar {
+        justify-content: center;
+      }
+
+      .hero {
+        padding: 58px 18px 32px;
+        border-radius: 28px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .cta-btn,
+      .secondary-btn,
+      .theme-toggle {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .features,
+      .profiles {
+        grid-template-columns: 1fr;
+      }
+    }
+
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: none; }
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: none;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="hero">
-    <h1>evol - 새로운 만남의 시작</h1>
-    <p>AI 기반 매칭으로 진짜 인연을 만나는 소개팅 앱, evol에서 설레는 첫 만남을 시작하세요.</p>
-    <button class="cta-btn" id="tryFreeBtn">무료로 이용해보기</button>
-  </div>
+  <div class="page-shell">
+    <div class="topbar">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="테마 전환">
+        <span class="theme-toggle-icon" id="themeToggleIcon">🌙</span>
+        <span id="themeToggleText">다크모드</span>
+      </button>
+    </div>
 
-  <div class="features">
-    <div class="feature">
-      <h3>실시간 AI 매칭</h3>
-      <p>AI가 내 취향을 분석해 가장 잘 맞는 상대를 추천해줘요.</p>
+    <div class="hero">
+      <div class="hero-badge">AI 추천 매칭 서비스</div>
+      <h1>evol - 새로운 만남의 시작</h1>
+      <p>AI 기반 매칭으로 진짜 인연을 만나는 소개팅 앱, evol에서 설레는 첫 만남을 시작하세요.</p>
+      <div class="hero-actions">
+        <button class="cta-btn" id="tryFreeBtn" type="button">무료로 이용해보기</button>
+        <button class="secondary-btn" id="previewThemeBtn" type="button">테마 미리 바꿔보기</button>
+      </div>
     </div>
-    <div class="feature">
-      <h3>안전한 인증 시스템</h3>
-      <p>철저한 인증으로 안심하고 만남을 시작할 수 있어요.</p>
-    </div>
-    <div class="feature">
-      <h3>감각적인 프로필 카드</h3>
-      <p>나만의 개성을 살린 프로필로 매력을 어필해보세요.</p>
-    </div>
-  </div>
 
-  <div class="mockup">
-    <div class="mockup-card">
-      <h2>evol</h2>
-      <p>진짜 인연을 만나는 가장 스마트한 방법</p>
+    <h2 class="section-heading">evol이 더 특별한 이유</h2>
+    <div class="features">
+      <div class="feature">
+        <h3>실시간 AI 매칭</h3>
+        <p>AI가 내 취향을 분석해 가장 잘 맞는 상대를 추천해줘요.</p>
+      </div>
+      <div class="feature">
+        <h3>안전한 인증 시스템</h3>
+        <p>철저한 인증으로 안심하고 만남을 시작할 수 있어요.</p>
+      </div>
+      <div class="feature">
+        <h3>감각적인 프로필 카드</h3>
+        <p>나만의 개성을 살린 프로필로 매력을 어필해보세요.</p>
+      </div>
     </div>
-  </div>
 
-  <div class="profiles-section" id="profilesSection">
-    <div class="profiles-title">추천 프로필</div>
-    <div class="profiles" id="profilesContainer"></div>
+    <div class="mockup">
+      <div class="mockup-card">
+        <h2>evol</h2>
+        <p>진짜 인연을 만나는 가장 스마트한 방법</p>
+      </div>
+    </div>
+
+    <div class="profiles-section" id="profilesSection">
+      <div class="profiles-title">추천 프로필</div>
+      <div class="profiles" id="profilesContainer"></div>
+    </div>
   </div>
 
   <script>
@@ -197,6 +420,7 @@
       { name: '서준', age: 28, desc: '요리와 드라이브, 새로운 맛집 탐방러.', img: 'https://randomuser.me/api/portraits/men/23.jpg' },
       { name: '시우', age: 26, desc: '반려동물과 산책, 자연을 사랑해요.', img: 'https://randomuser.me/api/portraits/men/54.jpg' }
     ];
+
     const femaleProfiles = [
       { name: '서연', age: 27, desc: '디자인 전공, 감각적인 취미를 즐겨요.', img: 'https://randomuser.me/api/portraits/women/65.jpg' },
       { name: '지아', age: 28, desc: '여행과 맛집, 새로운 친구를 좋아해요.', img: 'https://randomuser.me/api/portraits/women/12.jpg' },
@@ -206,9 +430,14 @@
       { name: '다은', age: 27, desc: '카페 탐방, 사진 찍기, 새로운 경험을 좋아해요.', img: 'https://randomuser.me/api/portraits/women/53.jpg' }
     ];
 
-    function getRandomProfiles(arr, n) {
+    const themeToggle = document.getElementById('themeToggle');
+    const themeToggleText = document.getElementById('themeToggleText');
+    const themeToggleIcon = document.getElementById('themeToggleIcon');
+    const previewThemeBtn = document.getElementById('previewThemeBtn');
+
+    function getRandomProfiles(arr, count) {
       const shuffled = arr.slice().sort(() => 0.5 - Math.random());
-      return shuffled.slice(0, n);
+      return shuffled.slice(0, count);
     }
 
     function renderProfiles() {
@@ -216,7 +445,8 @@
       const females = getRandomProfiles(femaleProfiles, 3);
       const container = document.getElementById('profilesContainer');
       container.innerHTML = '';
-      [...males, ...females].forEach(profile => {
+
+      [...males, ...females].forEach((profile) => {
         const card = document.createElement('div');
         card.className = 'profile-card';
         card.innerHTML = `
@@ -228,12 +458,42 @@
       });
     }
 
-    document.getElementById('tryFreeBtn').addEventListener('click', function() {
+    function syncThemeUi(isDark) {
+      themeToggleIcon.textContent = isDark ? '☀️' : '🌙';
+      themeToggleText.textContent = isDark ? '화이트모드' : '다크모드';
+      previewThemeBtn.textContent = isDark ? '화이트모드로 보기' : '다크모드로 보기';
+    }
+
+    function setTheme(mode) {
+      const isDark = mode === 'dark';
+      document.body.classList.toggle('dark-mode', isDark);
+      localStorage.setItem('evol-theme', mode);
+      syncThemeUi(isDark);
+    }
+
+    function toggleTheme() {
+      const nextMode = document.body.classList.contains('dark-mode') ? 'light' : 'dark';
+      setTheme(nextMode);
+    }
+
+    function initializeTheme() {
+      const savedTheme = localStorage.getItem('evol-theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const defaultTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+      setTheme(defaultTheme);
+    }
+
+    document.getElementById('tryFreeBtn').addEventListener('click', () => {
       renderProfiles();
       const section = document.getElementById('profilesSection');
       section.style.display = 'flex';
       section.scrollIntoView({ behavior: 'smooth' });
     });
+
+    themeToggle.addEventListener('click', toggleTheme);
+    previewThemeBtn.addEventListener('click', toggleTheme);
+
+    initializeTheme();
   </script>
 </body>
 </html>
